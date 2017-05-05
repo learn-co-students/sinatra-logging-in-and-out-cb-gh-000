@@ -11,7 +11,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-
+    # TODO - Find user in the db based on username
+    # TODO - If there is a match, set session to user's ID, redirect them to /account route, use ERB to display
+    # user's data on the page
+    # TODO - If there is no match, render the error page
   end
 
   get '/account' do
