@@ -11,20 +11,28 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    # TODO - Find user in the db based on username
-    # TODO - If there is a match, set session to user's ID, redirect them to /account route, use ERB to display
-    # user's data on the page
-    # TODO - If there is no match, render the error page
+    @user = User.find_by(username: params[:username])
+
+    if @user.nil?
+      erb :error
+    else
+      session[:user_id] = @user.id
+      redirect to('/account')
+    end
   end
 
   get '/account' do
-
+    @session = session
+    if Helpers.is_logged_in?(@session)
+      erb :account
+    else
+      erb :error
+    end
   end
 
   get '/logout' do
-
+    session.clear
+    redirect to ('/')
   end
-
-
 end
 
