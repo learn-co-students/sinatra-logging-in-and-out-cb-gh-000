@@ -1,7 +1,6 @@
 class Helpers
-  def current_user
-    # TODO - Should accept the session hash an an argument
-    # TODO - Should use user_id from session hash to find user in db and return that user
+  def self.current_user(session)
+    User.find(session[:user_id])
   end
 
   def is_logged_in?
