@@ -6,12 +6,13 @@
     <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css">  
   </head>
   <body id="page-top">
-  <% # TODO - Set up a link called 'Log Out' that clears the session %>
-  <a href="/logout">Log Out</a>
 
-  <% # TODO - user is_logged_in? to only display username and account balance if user is logged in, otherwise, only
-     # show link to the home page.
-     # Also use current_user to display the username and balance
-  %>
+  <% if Helpers.is_logged_in?(@session) %>
+      <h1><%= "Welcome #{Helpers.current_user(@session).username}" %></h1>
+      <h3><%= "Your Balance: #{Helpers.current_user(@session).balance}" %></h3>
+      <a href="/logout">Log Out</a>
+  <% else %>
+      <h1>You Must <a href="/">Log In</a> to View Your Balance</h1>
+  <% end %>
   </body>
 </html>
