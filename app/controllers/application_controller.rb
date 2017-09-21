@@ -11,7 +11,13 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-
+    @user = User.find_by(username: params["username"], password: params["password"])
+    if @user
+      # can you only redirect to a get request?
+      redirect to '/account'
+    else
+      erb :error
+    end
   end
 
   get '/account' do
@@ -24,4 +30,3 @@ class ApplicationController < Sinatra::Base
 
 
 end
-
