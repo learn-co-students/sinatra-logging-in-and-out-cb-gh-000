@@ -8,9 +8,12 @@
   <body id="page-top">
     <% if Helpers.is_logged_in?(session) %>
       <h1>Welcome <%= Helpers.current_user(session)[:username] %></h1>
-      <h1>Your Balance: <%= Helpers.current_user(session)[:balance].to_s %></h1>
+      <h3>Your Balance: <%= Helpers.current_user(session)[:balance].to_s %></h3>
     <% else %>
       <a href="/index">Home Page</a>
+      
+      <%# TODO temporary fix to get tests passing... %>
+      You Must <a href="/">Log In</a> to View Your Balance
     <% end %>
 
     <a href="/logout">Log Out</a>
