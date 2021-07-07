@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'ApplicationController' do
   describe "GET '/'" do
@@ -97,7 +98,7 @@ describe 'ApplicationController' do
       get '/logout'
       expect(session[:user_id]).to be(nil)
     end
-    
+
     it 'redirects to \'/\'' do
       get '/logout'
       follow_redirect!

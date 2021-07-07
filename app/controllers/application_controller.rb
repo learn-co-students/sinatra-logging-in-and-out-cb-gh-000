@@ -11,17 +11,25 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-
+       # TODO for some reason, this block is not directing all bad requests to
+       # the error page
+        @user = User.find_by(:username => params[:username])
+          if @user != nil && @user.password == params[:password]
+             session[:user_id] = @user.id
+             redirect to '/account'
+          else
+            erb :error
+          end
   end
 
   get '/account' do
-
+    erb :account
   end
 
   get '/logout' do
-
+    session.clear
+    redirect to '/'
   end
 
 
 end
-
